@@ -1,0 +1,13 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# Rider ignored files
+/modules.xml
+/projectSettingsUpdater.xml
+/.idea.GDC2021MegaPack.iml
+/contentModel.xml
+# Datasource local storage ignored files
+/../../../../../../../../../../:\creative\gamedev\unity\2021\GDCUnityStack2021\GDC2021MegaPack\.idea\.idea.GDC2021MegaPack\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/
