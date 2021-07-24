@@ -22,13 +22,13 @@ public class Bullet : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player1")
         {
-            Destroy(collision.gameObject);
+            collision.gameObject.SetActive(false);
             Destroy(gameObject);
             gameManager.tank1Destroyed = true;
         }
         else if (collision.gameObject.tag == "Player2")
         {
-            Destroy(collision.gameObject);
+            collision.gameObject.SetActive(false);
             Destroy(gameObject);
             gameManager.tank2Destroyed = true;
         }
