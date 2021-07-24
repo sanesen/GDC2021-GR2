@@ -1,0 +1,9 @@
+diff a/GDC2021MegaPack/Assets/Scenes/Tank.unity b/GDC2021MegaPack/Assets/Scenes/Tank.unity	(rejected hunks)
+@@ -1037,7 +1037,6 @@
+   m_EditorClassIdentifier: 
+   tank1Destroyed: 0
+   tank2Destroyed: 0
+-  pointText1: {fileID: 0}
+   gameTime: 120
+   pointText1: {fileID: 1996911755}
+   pointText2: {fileID: 90076445}

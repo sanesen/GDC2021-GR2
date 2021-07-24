@@ -58,14 +58,14 @@ MonoBehaviour:
   m_Active: 1
   settings:
     passTag: NewRenderObjects
-    Event: 300
+    Event: 1000
     filterSettings:
       RenderQueueType: 0
       LayerMask:
         serializedVersion: 2
-        m_Bits: 0
+        m_Bits: 4294967295
       PassNames: []
-    overrideMaterial: {fileID: 0}
+    overrideMaterial: {fileID: 2100000, guid: 2e7879517bce59344af28c5ddf8d330f, type: 2}
     overrideMaterialPassIndex: 0
     overrideDepthState: 0
     depthCompareFunction: 4
