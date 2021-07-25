@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
     public GameObject tank1, tank2;
     int randomSpawnpoint;
     public GameObject[] spawnpoints;
+    bool pauseState;
+
 
 
 
@@ -82,6 +84,7 @@ public class GameManager : MonoBehaviour
             tank1Destroyed = false;
             randomSpawnpoint = Random.Range(0, 4);
             tank1.transform.position = spawnpoints[randomSpawnpoint].transform.position;
+            tank1.gameObject.SetActive(true);
         }
 
         if (tank2Destroyed)
@@ -91,6 +94,7 @@ public class GameManager : MonoBehaviour
             tank2Destroyed = false;
             randomSpawnpoint = Random.Range(0, 4);
             tank2.transform.position = spawnpoints[randomSpawnpoint].transform.position;
+            tank2.gameObject.SetActive(true);
         }
     }
 
@@ -140,6 +144,14 @@ public class GameManager : MonoBehaviour
     public void quit_button()
     {
         Application.Quit();
+    }
+
+    void menu()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+
+        }
     }
 }
 
