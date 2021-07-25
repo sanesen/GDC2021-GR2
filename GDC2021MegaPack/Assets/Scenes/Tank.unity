@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &83424789 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6905192549338696691, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
+  m_PrefabInstance: {fileID: 5033094679143995318}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &90076443
 GameObject:
   m_ObjectHideFlags: 0
@@ -420,6 +425,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &162920803 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6905192549680891737, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
+  m_PrefabInstance: {fileID: 5033094679143995318}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &310164894
 GameObject:
   m_ObjectHideFlags: 0
@@ -450,16 +460,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &330209868 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8713619454233057416, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
-  m_PrefabInstance: {fileID: 5033094679143995318}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &382936262 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8713619454233057416, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
-  m_PrefabInstance: {fileID: 446434433}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &446434433
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -482,7 +482,7 @@ PrefabInstance:
     - target: {fileID: 5033094679019593940, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
       propertyPath: gunPoint1
       value: 
-      objectReference: {fileID: 382936262}
+      objectReference: {fileID: 0}
     - target: {fileID: 5033094679019593943, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -535,6 +535,42 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player2
       objectReference: {fileID: 0}
+    - target: {fileID: 6905192549379718400, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 582167476}
+    - target: {fileID: 6905192549379718400, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
+      propertyPath: bullet
+      value: 
+      objectReference: {fileID: 7748731555546853698, guid: e21dec183d969bf49be3ad31ddb526ab, type: 3}
+    - target: {fileID: 6905192549379718400, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
+      propertyPath: player1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6905192549379718400, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
+      propertyPath: pointer
+      value: 
+      objectReference: {fileID: 802745703}
+    - target: {fileID: 6905192549379718400, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
+      propertyPath: opponent
+      value: 
+      objectReference: {fileID: 891111450}
+    - target: {fileID: 6905192549379718401, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
+      propertyPath: m_Name
+      value: Tank 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6905192549379718401, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
+      propertyPath: m_TagString
+      value: Player2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6905192549379718459, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6905192549379718459, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8713619454233057416, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0
@@ -545,11 +581,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
---- !u!1 &550645312 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5033094679019593963, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
-  m_PrefabInstance: {fileID: 446434433}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &582167476
 GameObject:
   m_ObjectHideFlags: 0
@@ -787,6 +818,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 588960020}
   m_CullTransparentMesh: 1
+--- !u!1 &802745703 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6905192549680891737, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
+  m_PrefabInstance: {fileID: 446434433}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &822477633
 GameObject:
   m_ObjectHideFlags: 0
@@ -1178,6 +1214,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e21dec183d969bf49be3ad31ddb526ab, type: 3}
+--- !u!1 &891111450 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6905192549379718401, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
+  m_PrefabInstance: {fileID: 5033094679143995318}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &930124048
 GameObject:
   m_ObjectHideFlags: 0
@@ -1303,11 +1344,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1068503473 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5033094679019593963, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
-  m_PrefabInstance: {fileID: 5033094679143995318}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1128769583
 GameObject:
   m_ObjectHideFlags: 0
@@ -1647,8 +1683,8 @@ MonoBehaviour:
   canvas: {fileID: 862080003}
   rematch: {fileID: 115615787}
   quit: {fileID: 588960022}
-  tank1: {fileID: 1068503473}
-  tank2: {fileID: 550645312}
+  tank1: {fileID: 891111450}
+  tank2: {fileID: 2048934034}
   spawnpoints:
   - {fileID: 1336601735}
   - {fileID: 310164894}
@@ -1997,6 +2033,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2001285268}
   m_CullTransparentMesh: 1
+--- !u!1 &2048934034 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6905192549379718401, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
+  m_PrefabInstance: {fileID: 446434433}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2102373222
 GameObject:
   m_ObjectHideFlags: 0
@@ -2149,7 +2190,7 @@ PrefabInstance:
     - target: {fileID: 5033094679019593940, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
       propertyPath: gunPoint1
       value: 
-      objectReference: {fileID: 330209868}
+      objectReference: {fileID: 0}
     - target: {fileID: 5033094679019593941, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
       propertyPath: m_UseGravity
       value: 1
@@ -2205,6 +2246,38 @@ PrefabInstance:
     - target: {fileID: 5033094679019593963, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
       propertyPath: m_TagString
       value: Player1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6905192549379718400, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1977585868}
+    - target: {fileID: 6905192549379718400, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
+      propertyPath: bullet
+      value: 
+      objectReference: {fileID: 7748731555546853698, guid: e21dec183d969bf49be3ad31ddb526ab, type: 3}
+    - target: {fileID: 6905192549379718400, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
+      propertyPath: pointer
+      value: 
+      objectReference: {fileID: 162920803}
+    - target: {fileID: 6905192549379718400, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
+      propertyPath: opponent
+      value: 
+      objectReference: {fileID: 2048934034}
+    - target: {fileID: 6905192549379718400, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
+      propertyPath: gunPoint1
+      value: 
+      objectReference: {fileID: 83424789}
+    - target: {fileID: 6905192549379718401, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
+      propertyPath: m_Name
+      value: Tank 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6905192549379718401, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
+      propertyPath: m_TagString
+      value: Player1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6905192549379718459, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8713619454233057416, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
       propertyPath: m_LocalPosition.z
