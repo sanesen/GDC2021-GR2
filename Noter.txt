@@ -1,0 +1,13 @@
+Powerup ideas:
+- Scattershot
+- Shotgun
+- Armor (timed)
+- Fast shot
+- Booby-trap
+- 0 friction
+- Inf bounce
+- Super speed
+- Gatling gun
+- Minimize
+- Ghost shot (trough walls)
+- Fake powerup
