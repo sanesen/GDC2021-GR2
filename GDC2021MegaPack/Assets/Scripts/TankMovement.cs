@@ -17,6 +17,9 @@ public class TankMovement : MonoBehaviour
     public Transform gunPoint1;
     private float timeSinceLastFire;
     public float reloadTime;
+    public GameObject opponent;
+    public GameObject pointer;
+
 
 
     void Start()
@@ -38,7 +41,21 @@ public class TankMovement : MonoBehaviour
 
     void Update()
     {
+        move_handler();
+        compass();
 
+        cam.transform.position = camPos.transform.position;
+        cam.transform.rotation = camPos.transform.rotation;
+    }
+
+    void compass()
+    {
+        pointer.transform.LookAt(opponent.transform.position);
+        print(pointer.transform.rotation);
+    }
+
+    void move_handler()
+    {
         if (player1)
         {
             if (Input.GetKey(KeyCode.W))
@@ -50,8 +67,6 @@ public class TankMovement : MonoBehaviour
             {
                 RBvelocity.AddForce(-transform.forward * moveSpeed);
             }
-
-
 
             if (Input.GetKey("d"))
             {
@@ -86,8 +101,6 @@ public class TankMovement : MonoBehaviour
                 RBvelocity.AddForce(-transform.forward * moveSpeed);
             }
 
-
-
             if (Input.GetKey(KeyCode.RightArrow))
             {
                 transform.eulerAngles += new Vector3(0, rotationSpeed, 0) * Time.deltaTime;
@@ -108,11 +121,6 @@ public class TankMovement : MonoBehaviour
                 }
             }
         }
-
-
         RBvelocity.velocity = Vector3.ClampMagnitude(RBvelocity.velocity, maxMoveSpeed);
-
-        cam.transform.position = camPos.transform.position;
-        cam.transform.rotation = camPos.transform.rotation;
     }
 }
