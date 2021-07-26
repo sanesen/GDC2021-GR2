@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TankMovement : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class TankMovement : MonoBehaviour
     public float reloadTime;
     public GameObject opponent;
     public GameObject pointer;
+    public GameObject reloadUI;
 
 
 
@@ -92,6 +94,8 @@ public class TankMovement : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                reloadUI.GetComponent<Image>().color = new Vector4(255, 255, 255, 40);
+
                 if (timeSinceLastFire + reloadTime <= Time.time)
                 {
                     timeSinceLastFire = Time.time;
@@ -106,6 +110,15 @@ public class TankMovement : MonoBehaviour
 
                 gameObject.transform.rotation = Quaternion.identity;
 
+            }
+
+            if (timeSinceLastFire+reloadTime>Time.time)
+            {
+                reloadUI.GetComponent<CanvasGroup>().alpha = 0.6f;
+            }
+            else
+            {
+                reloadUI.GetComponent<CanvasGroup>().alpha = 1f;
             }
         }
         else
@@ -147,6 +160,14 @@ public class TankMovement : MonoBehaviour
 
             }
 
+            if (timeSinceLastFire + reloadTime > Time.time)
+            {
+                reloadUI.GetComponent<CanvasGroup>().alpha = 0.6f;
+            }
+            else
+            {
+                reloadUI.GetComponent<CanvasGroup>().alpha = 1f;
+            }
         }
         RBvelocity.velocity = Vector3.ClampMagnitude(RBvelocity.velocity, maxMoveSpeed);
     }

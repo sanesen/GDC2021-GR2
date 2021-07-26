@@ -20,7 +20,6 @@ public class Bullet : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(RBbullet.velocity);
 
         
     }
