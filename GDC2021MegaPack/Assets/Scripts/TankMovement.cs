@@ -13,7 +13,7 @@ public class TankMovement : MonoBehaviour
     public GameObject camPos;
     public bool player1;
     public Material color1, color2;
-    public GameObject child;
+    //public GameObject child;
     public GameObject bullet;
     public Transform gunPoint1;
     private float timeSinceLastFire;
@@ -37,12 +37,12 @@ public class TankMovement : MonoBehaviour
         if (player1)
         {
             color.material = color1;
-            child.GetComponent<MeshRenderer>().material = color1;
+            //child.GetComponent<MeshRenderer>().material = color1;
         }
         else
         {
             color.material = color2;
-            child.GetComponent<MeshRenderer>().material = color2;
+            //child.GetComponent<MeshRenderer>().material = color2;
         }
     }
 
@@ -216,7 +216,7 @@ public class TankMovement : MonoBehaviour
         if (playShotSound)
         {
             print("muzzleSounds");
-            GameObject muzzle = this.gameObject.transform.Find("Tank_Færdigmoddeleret_UdenAnimation").Find("Muzzle").gameObject;
+            GameObject muzzle = this.gameObject.transform.Find("Tank_Færdig - Uden animation").Find("Muzzle").gameObject;
             //print(test);
             //this.gameObject.transform.Find("Muzzle").GetComponent<AudioSource>().clip = audioManager.play_shot();
             //this.gameObject.transform.Find("Muzzle").GetComponent<AudioSource>().Play();
