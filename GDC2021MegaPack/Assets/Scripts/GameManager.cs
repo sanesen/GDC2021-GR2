@@ -128,7 +128,7 @@ public class GameManager : MonoBehaviour
                     winner.color = Color.grey;
                 }
 
-                SceneManager.LoadScene(0);
+                SceneManager.LoadScene(1);
                 winner.enabled = true;
                 rematch.gameObject.SetActive(true);
                 quit.gameObject.SetActive(true);
@@ -138,7 +138,7 @@ public class GameManager : MonoBehaviour
         //Rematch setup
         public void rematch_button()
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(0);
             Destroy(gameObject);
             timer = gameTime;
             winner.enabled = false;
