@@ -85,6 +85,7 @@ public class TankMovement : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S))
             {
                 audioSource.clip = audioManager.play_move();
+                audioSource.volume = 0.2f;
                 audioSource.Play();
                 if (Input.GetKeyDown(KeyCode.W))
                 {
@@ -98,6 +99,7 @@ public class TankMovement : MonoBehaviour
             else if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S))
             {
                 audioSource.clip = audioManager.play_idle();
+                audioSource.volume = 0.1f;
                 audioSource.Play();
                 zInput = 0;
             }
@@ -152,6 +154,7 @@ public class TankMovement : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
             {
                 audioSource.clip = audioManager.play_move();
+                audioSource.volume = 0.2f;
                 audioSource.Play();
                 if (Input.GetKeyDown(KeyCode.UpArrow))
                 {
@@ -165,6 +168,7 @@ public class TankMovement : MonoBehaviour
             else if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow))
             {
                 audioSource.clip = audioManager.play_idle();
+                audioSource.volume = 0.1f;
                 audioSource.Play();
                 zInput = 0;
             }
@@ -215,20 +219,11 @@ public class TankMovement : MonoBehaviour
     {
         if (playShotSound)
         {
-            print("muzzleSounds");
             GameObject muzzle = this.gameObject.transform.Find("Tank_Færdig - Uden animation").Find("Muzzle").gameObject;
-            //print(test);
-            //this.gameObject.transform.Find("Muzzle").GetComponent<AudioSource>().clip = audioManager.play_shot();
-            //this.gameObject.transform.Find("Muzzle").GetComponent<AudioSource>().Play();
             playShotSound = false;
-            //this.gameObject.transform.Find("Muzzle").GetComponent<AudioSource>().clip = audioManager.play_reload();
-            //this.gameObject.transform.Find("Muzzle").GetComponent<AudioSource>().Play();
             muzzle.GetComponent<AudioSource>().clip = audioManager.play_reload();
+            muzzle.GetComponent<AudioSource>().volume = 0.5f;
             muzzle.GetComponent<AudioSource>().Play();
-        }
-        else if (!playShotSound)
-        {
-            print("error");
         }
     }
     
