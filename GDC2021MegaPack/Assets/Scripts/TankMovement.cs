@@ -21,11 +21,16 @@ public class TankMovement : MonoBehaviour
     public GameObject opponent;
     public GameObject pointer;
     public GameObject reloadUI;
-
-
+    public AudioClip idleSound, drivingSound;
+    public AudioManager audioManager;
+    float xInput, zInput;
+    AudioSource audioSource;
+    bool playShotSound;
+    bool playReloadSound;
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         RBvelocity = gameObject.GetComponent<Rigidbody>();
         MeshRenderer color = gameObject.GetComponent<MeshRenderer>();
 
@@ -43,13 +48,18 @@ public class TankMovement : MonoBehaviour
 
     void Update()
     {
-        move_handler();
+
+        muzzle_sounds();
         compass();
-      
+
 
         cam.transform.position = camPos.transform.position;
         cam.transform.rotation = camPos.transform.rotation;
 
+    }
+    private void FixedUpdate()
+    {
+        move_handler();
     }
 
     void compass()
@@ -60,9 +70,9 @@ public class TankMovement : MonoBehaviour
     //reset position
     void reset_position()
     {
-        if(Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R))
         {
-            
+
             gameObject.transform.rotation = Quaternion.identity;
 
         }
@@ -72,24 +82,38 @@ public class TankMovement : MonoBehaviour
     {
         if (player1)
         {
-            if (Input.GetKey(KeyCode.W))
+            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S))
             {
-                RBvelocity.AddForce(transform.forward * moveSpeed);
+                audioSource.clip = audioManager.play_move();
+                audioSource.Play();
+                if (Input.GetKeyDown(KeyCode.W))
+                {
+                    zInput = 1f;
+                }
+                else if (Input.GetKeyDown(KeyCode.S))
+                {
+                    zInput = -1f;
+                }
             }
+            else if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S))
+            {
+                audioSource.clip = audioManager.play_idle();
+                audioSource.Play();
+                zInput = 0;
+            }
+            RBvelocity.AddForce(zInput * transform.forward * moveSpeed);
 
-            if (Input.GetKey(KeyCode.S))
-            {
-                RBvelocity.AddForce(-transform.forward * moveSpeed);
-            }
+
+
 
             if (Input.GetKey("d"))
             {
-                transform.eulerAngles += new Vector3(0, rotationSpeed, 0) * Time.deltaTime;
+                transform.eulerAngles += new Vector3(0, rotationSpeed, 0) * Time.fixedDeltaTime;
             }
 
             if (Input.GetKey("a"))
             {
-                transform.eulerAngles += new Vector3(0, -rotationSpeed, 0) * Time.deltaTime;
+                transform.eulerAngles += new Vector3(0, -rotationSpeed, 0) * Time.fixedDeltaTime;
             }
 
             if (Input.GetKeyDown(KeyCode.Space))
@@ -101,6 +125,8 @@ public class TankMovement : MonoBehaviour
                     timeSinceLastFire = Time.time;
                     Instantiate(bullet, new Vector3(gunPoint1.transform.position.x, gunPoint1.transform.position.y, gunPoint1.transform.position.z),
                     Quaternion.Euler(new Vector3(this.gameObject.transform.eulerAngles.x, this.gameObject.transform.eulerAngles.y, this.gameObject.transform.eulerAngles.z)));
+                    playShotSound = true;
+                    playReloadSound = true;
                 }
 
             }
@@ -112,7 +138,7 @@ public class TankMovement : MonoBehaviour
 
             }
 
-            if (timeSinceLastFire+reloadTime>Time.time)
+            if (timeSinceLastFire + reloadTime > Time.time)
             {
                 reloadUI.GetComponent<CanvasGroup>().alpha = 0.6f;
             }
@@ -123,15 +149,26 @@ public class TankMovement : MonoBehaviour
         }
         else
         {
-            if (Input.GetKey(KeyCode.UpArrow))
+            if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
             {
-                RBvelocity.AddForce(transform.forward * moveSpeed);
+                audioSource.clip = audioManager.play_move();
+                audioSource.Play();
+                if (Input.GetKeyDown(KeyCode.UpArrow))
+                {
+                    zInput = 1f;
+                }
+                else if (Input.GetKeyDown(KeyCode.DownArrow))
+                {
+                    zInput = -1f;
+                }
             }
-
-            if (Input.GetKey(KeyCode.DownArrow))
+            else if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow))
             {
-                RBvelocity.AddForce(-transform.forward * moveSpeed);
+                audioSource.clip = audioManager.play_idle();
+                audioSource.Play();
+                zInput = 0;
             }
+            RBvelocity.AddForce(zInput * transform.forward * moveSpeed);
 
             if (Input.GetKey(KeyCode.RightArrow))
             {
@@ -150,6 +187,8 @@ public class TankMovement : MonoBehaviour
                     timeSinceLastFire = Time.time;
                     Instantiate(bullet, new Vector3(gunPoint1.transform.position.x, gunPoint1.transform.position.y, gunPoint1.transform.position.z),
                     Quaternion.Euler(new Vector3(this.gameObject.transform.eulerAngles.x, this.gameObject.transform.eulerAngles.y, this.gameObject.transform.eulerAngles.z)));
+                    playShotSound = true;
+                    playReloadSound = true;
                 }
             }
 
@@ -172,6 +211,27 @@ public class TankMovement : MonoBehaviour
         RBvelocity.velocity = Vector3.ClampMagnitude(RBvelocity.velocity, maxMoveSpeed);
     }
 
+    void muzzle_sounds()
+    {
+        if (playShotSound)
+        {
+            print("muzzleSounds");
+            GameObject muzzle = this.gameObject.transform.Find("Tank_Færdigmoddeleret_UdenAnimation").Find("Muzzle").gameObject;
+            //print(test);
+            //this.gameObject.transform.Find("Muzzle").GetComponent<AudioSource>().clip = audioManager.play_shot();
+            //this.gameObject.transform.Find("Muzzle").GetComponent<AudioSource>().Play();
+            playShotSound = false;
+            //this.gameObject.transform.Find("Muzzle").GetComponent<AudioSource>().clip = audioManager.play_reload();
+            //this.gameObject.transform.Find("Muzzle").GetComponent<AudioSource>().Play();
+            muzzle.GetComponent<AudioSource>().clip = audioManager.play_reload();
+            muzzle.GetComponent<AudioSource>().Play();
+        }
+        else if (!playShotSound)
+        {
+            print("error");
+        }
+    }
+    
     public void test()
     {
         print("test");

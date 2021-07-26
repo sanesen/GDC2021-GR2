@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class Bullet : MonoBehaviour
 {
@@ -10,18 +11,23 @@ public class Bullet : MonoBehaviour
     public float bulletSpeed;
     int bulletBounces;
     public int maxBulletBounces;
+    public AudioManager audioManager;
+    AudioSource audioSource;
 
     void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         gameManager = FindObjectOfType<GameManager>();
         RBbullet = GetComponent<Rigidbody>();
         RBbullet.AddForce(transform.forward * bulletSpeed, ForceMode.VelocityChange);
+        //audioSource.clip = audioManager.play_shot();
+        //audioSource.Play();
     }
 
     private void Update()
     {
 
-        
+
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -50,7 +56,7 @@ public class Bullet : MonoBehaviour
             }
             Vector3 bulletdirection = Vector3.zero;
 
-            bulletdirection = new Vector3(RBbullet.velocity.x, 0 , RBbullet.velocity.z);
+            bulletdirection = new Vector3(RBbullet.velocity.x, 0, RBbullet.velocity.z);
             //bulletdirection.Normalize();
             bulletdirection.y = 0;
             Quaternion targetRotation = Quaternion.LookRotation(bulletdirection);
