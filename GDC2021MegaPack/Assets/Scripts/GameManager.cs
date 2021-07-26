@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    //defining variables
     private static GameManager _instance;
 
     public bool tank1Destroyed, tank2Destroyed;
@@ -23,11 +24,14 @@ public class GameManager : MonoBehaviour
     public GameObject tank1, tank2;
     int randomSpawnpoint;
     public GameObject[] spawnpoints;
-    bool pauseState;
+    bool pauseState = false;
+    public TextMeshProUGUI pausedText;
+    public Image pauseBackground;
+    public Image winnerImage;
 
 
 
-
+    //GM reset
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -35,6 +39,7 @@ public class GameManager : MonoBehaviour
 
         if (_instance != null)
         {
+            _instance.OnDisable();
             Destroy(_instance);
         }
 
@@ -44,16 +49,14 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1;
         timer = gameTime;
         winner.enabled = false;
         rematch.gameObject.SetActive(false);
         quit.gameObject.SetActive(false);
-        //spawnpoints = new GameObject[amountOfSpawnpoints];
-        //foreach (GameObject gameObject in spawnpoints)
-        //{
-        //    int i = 0;
-        //    spawnpoints[i].name = "spawnpoint" + i + 1;
-        //}
+        pausedText.enabled = false;
+        pauseBackground.enabled = false;
+        winnerImage.enabled = false;
     }
 
     // Update is called once per frame
@@ -61,6 +64,7 @@ public class GameManager : MonoBehaviour
     {
         points();
         time_left();
+        menu();
     }
 
     private void OnEnable()
@@ -76,7 +80,7 @@ public class GameManager : MonoBehaviour
     }
 
     void points()
-    {
+    {//points system
         if (tank1Destroyed)
         {
             point2++;
@@ -98,6 +102,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //time stamp (game time)
     void time_left()
     {
         if (SceneManager.GetActiveScene().buildIndex == 0)
@@ -108,7 +113,7 @@ public class GameManager : MonoBehaviour
 
 
         if (timer <= 0 && !(SceneManager.GetActiveScene().buildIndex == 1))
-        {
+        {//winner display
             if (point1 > point2)
             {
                 winner.text = "Player 1 wins!";
@@ -124,16 +129,20 @@ public class GameManager : MonoBehaviour
                 winner.text = "Draw. Try again!";
                 winner.color = Color.grey;
             }
+
             SceneManager.LoadScene(1);
             winner.enabled = true;
             rematch.gameObject.SetActive(true);
             quit.gameObject.SetActive(true);
+            winnerImage.enabled = true;
         }
     }
 
+    //Rematch setup
     public void rematch_button()
     {
         SceneManager.LoadScene(0);
+        Destroy(gameObject);
         timer = gameTime;
         winner.enabled = false;
         rematch.gameObject.SetActive(false);
@@ -141,17 +150,38 @@ public class GameManager : MonoBehaviour
         Destroy(canvas);
     }
 
+
+    //quit button
     public void quit_button()
     {
         Application.Quit();
     }
 
+    //menu system / pause system
     void menu()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().buildIndex == 0)
         {
-
+            if (pauseState == false)
+            {
+                Time.timeScale = 0;
+                pauseState = true;
+                pauseBackground.enabled = true;
+                pausedText.enabled = true;
+                rematch.gameObject.SetActive(true);
+                quit.gameObject.SetActive(true);
+            }
+            else
+            {
+                Time.timeScale = 1;
+                pauseState = false;
+                pausedText.enabled = false;
+                pauseBackground.enabled = false;
+                rematch.gameObject.SetActive(false);
+                quit.gameObject.SetActive(false);
+            }
         }
     }
+
 }
 

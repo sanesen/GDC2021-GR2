@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TankMovement : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class TankMovement : MonoBehaviour
     public float reloadTime;
     public GameObject opponent;
     public GameObject pointer;
+    public GameObject reloadUI;
 
 
 
@@ -43,15 +45,27 @@ public class TankMovement : MonoBehaviour
     {
         move_handler();
         compass();
+      
 
         cam.transform.position = camPos.transform.position;
         cam.transform.rotation = camPos.transform.rotation;
+
     }
 
     void compass()
     {
         pointer.transform.LookAt(opponent.transform.position);
-        print(pointer.transform.rotation);
+    }
+
+    //reset position
+    void reset_position()
+    {
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            
+            gameObject.transform.rotation = Quaternion.identity;
+
+        }
     }
 
     void move_handler()
@@ -80,6 +94,8 @@ public class TankMovement : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                reloadUI.GetComponent<Image>().color = new Vector4(255, 255, 255, 40);
+
                 if (timeSinceLastFire + reloadTime <= Time.time)
                 {
                     timeSinceLastFire = Time.time;
@@ -87,6 +103,22 @@ public class TankMovement : MonoBehaviour
                     Quaternion.Euler(new Vector3(this.gameObject.transform.eulerAngles.x, this.gameObject.transform.eulerAngles.y, this.gameObject.transform.eulerAngles.z)));
                 }
 
+            }
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+
+                gameObject.transform.rotation = Quaternion.identity;
+
+            }
+
+            if (timeSinceLastFire+reloadTime>Time.time)
+            {
+                reloadUI.GetComponent<CanvasGroup>().alpha = 0.6f;
+            }
+            else
+            {
+                reloadUI.GetComponent<CanvasGroup>().alpha = 1f;
             }
         }
         else
@@ -120,7 +152,28 @@ public class TankMovement : MonoBehaviour
                     Quaternion.Euler(new Vector3(this.gameObject.transform.eulerAngles.x, this.gameObject.transform.eulerAngles.y, this.gameObject.transform.eulerAngles.z)));
                 }
             }
+
+            if (Input.GetKeyDown(KeyCode.O))
+            {
+
+                gameObject.transform.rotation = Quaternion.identity;
+
+            }
+
+            if (timeSinceLastFire + reloadTime > Time.time)
+            {
+                reloadUI.GetComponent<CanvasGroup>().alpha = 0.6f;
+            }
+            else
+            {
+                reloadUI.GetComponent<CanvasGroup>().alpha = 1f;
+            }
         }
         RBvelocity.velocity = Vector3.ClampMagnitude(RBvelocity.velocity, maxMoveSpeed);
+    }
+
+    public void test()
+    {
+        print("test");
     }
 }
