@@ -39,6 +39,7 @@ public class TankMovement : MonoBehaviour
     public float maxPowerUpTime;
     float superReloadTime;
     float standardReloadTime;
+    GameManager gameManager;
 
 
 
@@ -49,6 +50,7 @@ public class TankMovement : MonoBehaviour
         RBvelocity = gameObject.GetComponent<Rigidbody>();
         MeshRenderer color = gameObject.GetComponent<MeshRenderer>();
         powerUpManager = FindObjectOfType<PowerUpManager>();
+        gameManager = FindObjectOfType<GameManager>();
         print(powerUpActive.ToString());
 
         standardReloadTime = reloadTime;
@@ -70,6 +72,7 @@ public class TankMovement : MonoBehaviour
     void Update()
     {
 
+
         muzzle_sounds();
         compass();
         power_active();
@@ -79,6 +82,7 @@ public class TankMovement : MonoBehaviour
         cam.transform.rotation = camPos.transform.rotation;
 
     }
+
     private void FixedUpdate()
     {
         move_handler();
@@ -109,7 +113,7 @@ public class TankMovement : MonoBehaviour
                 audioSource.clip = audioManager.play_move();
                 audioSource.volume = 0.2f;
                 audioSource.Play();
-                
+
                 if (Input.GetKeyDown(KeyCode.W))
                 {
                     zInput = 1f;
@@ -251,7 +255,7 @@ public class TankMovement : MonoBehaviour
                 print("gMER");
                 if (powerUpReloadTime)
                 {
-                    reloadTime *= 0.5f;
+                    reloadTime = superReloadTime;
                     print("fastReload");
                 }
                 if (timeSinceLastFire + reloadTime <= Time.time)
@@ -262,6 +266,7 @@ public class TankMovement : MonoBehaviour
                     playShotSound = true;
                     playReloadSound = true;
                 }
+                reloadTime = standardReloadTime;
             }
 
             if (Input.GetKeyDown(KeyCode.O))
