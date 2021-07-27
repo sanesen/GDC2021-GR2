@@ -39,4 +39,14 @@ public class AudioManager : MonoBehaviour
         return audioClips[6];
     }
 
+    public AudioClip play_bounce()
+    {
+        return audioClips[0];
+    }
+
+    public AudioClip play_explosion()
+    {
+        return audioClips[2];
+    }
+
 }

@@ -27,12 +27,32 @@ public class TankMovement : MonoBehaviour
     AudioSource audioSource;
     bool playShotSound;
     bool playReloadSound;
+    Animator tankAnimator;
+    PowerUpManager powerUpManager;
+    int whichPowerUp;
+    public int amountOfPowerUps;
+    public bool powerUpSuperSpeed;
+    public bool powerUpReloadTime;
+    public bool powerUpScattershot;
+    public float powerUpTime;
+    public bool powerUpActive;
+    public float maxPowerUpTime;
+    float superReloadTime;
+    float standardReloadTime;
+
+
 
     void Start()
     {
+        tankAnimator = this.gameObject.transform.Find("Tank2 V2,lav_Animation_Skud og larvefødder").GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         RBvelocity = gameObject.GetComponent<Rigidbody>();
         MeshRenderer color = gameObject.GetComponent<MeshRenderer>();
+        powerUpManager = FindObjectOfType<PowerUpManager>();
+        print(powerUpActive.ToString());
+
+        standardReloadTime = reloadTime;
+        superReloadTime = reloadTime / 2;
 
         if (player1)
         {
@@ -44,6 +64,7 @@ public class TankMovement : MonoBehaviour
             color.material = color2;
             //child.GetComponent<MeshRenderer>().material = color2;
         }
+        rotationSpeed = 60f;
     }
 
     void Update()
@@ -51,6 +72,7 @@ public class TankMovement : MonoBehaviour
 
         muzzle_sounds();
         compass();
+        power_active();
 
 
         cam.transform.position = camPos.transform.position;
@@ -85,21 +107,42 @@ public class TankMovement : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S))
             {
                 audioSource.clip = audioManager.play_move();
+                audioSource.volume = 0.2f;
                 audioSource.Play();
+                
                 if (Input.GetKeyDown(KeyCode.W))
                 {
                     zInput = 1f;
+                    rotationSpeed = 45f;
+                    tankAnimator.SetBool("Forward", true);
+                    if (powerUpSuperSpeed)
+                    {
+                        zInput *= 1.5f;
+                        print("superspeed");
+                    }
                 }
                 else if (Input.GetKeyDown(KeyCode.S))
                 {
                     zInput = -1f;
+                    rotationSpeed = -45f;
+                    tankAnimator.SetBool("Backward", true);
+
+                    if (powerUpSuperSpeed)
+                    {
+                        zInput *= 1.5f;
+                        print("superspeed");
+                    }
                 }
             }
             else if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S))
             {
                 audioSource.clip = audioManager.play_idle();
+                audioSource.volume = 0.1f;
                 audioSource.Play();
                 zInput = 0;
+                rotationSpeed = 60f;
+                tankAnimator.SetBool("Forward", false);
+                tankAnimator.SetBool("Backward", false);
             }
             RBvelocity.AddForce(zInput * transform.forward * moveSpeed);
 
@@ -118,7 +161,11 @@ public class TankMovement : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                reloadUI.GetComponent<Image>().color = new Vector4(255, 255, 255, 40);
+                if (powerUpReloadTime)
+                {
+                    reloadTime = superReloadTime;
+                    print("fastReload");
+                }
 
                 if (timeSinceLastFire + reloadTime <= Time.time)
                 {
@@ -128,7 +175,7 @@ public class TankMovement : MonoBehaviour
                     playShotSound = true;
                     playReloadSound = true;
                 }
-
+                reloadTime = standardReloadTime;
             }
 
             if (Input.GetKeyDown(KeyCode.R))
@@ -152,21 +199,40 @@ public class TankMovement : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
             {
                 audioSource.clip = audioManager.play_move();
+                audioSource.volume = 0.2f;
                 audioSource.Play();
                 if (Input.GetKeyDown(KeyCode.UpArrow))
                 {
+                    rotationSpeed = 45f;
                     zInput = 1f;
+                    tankAnimator.SetBool("Forward", true);
+                    if (powerUpSuperSpeed)
+                    {
+                        zInput *= 1.5f;
+                        print("superspeed");
+                    }
                 }
                 else if (Input.GetKeyDown(KeyCode.DownArrow))
                 {
                     zInput = -1f;
+                    rotationSpeed = -45f;
+                    tankAnimator.SetBool("Backward", true);
+                    if (powerUpSuperSpeed)
+                    {
+                        zInput *= 1.5f;
+                        print("superspeed");
+                    }
                 }
             }
             else if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow))
             {
                 audioSource.clip = audioManager.play_idle();
+                audioSource.volume = 0.1f;
                 audioSource.Play();
                 zInput = 0;
+                rotationSpeed = 60f;
+                tankAnimator.SetBool("Forward", false);
+                tankAnimator.SetBool("Backward", false);
             }
             RBvelocity.AddForce(zInput * transform.forward * moveSpeed);
 
@@ -182,6 +248,12 @@ public class TankMovement : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.P))
             {
+                print("gMER");
+                if (powerUpReloadTime)
+                {
+                    reloadTime *= 0.5f;
+                    print("fastReload");
+                }
                 if (timeSinceLastFire + reloadTime <= Time.time)
                 {
                     timeSinceLastFire = Time.time;
@@ -215,25 +287,65 @@ public class TankMovement : MonoBehaviour
     {
         if (playShotSound)
         {
-            print("muzzleSounds");
-            GameObject muzzle = this.gameObject.transform.Find("Tank_Færdig - Uden animation").Find("Muzzle").gameObject;
-            //print(test);
-            //this.gameObject.transform.Find("Muzzle").GetComponent<AudioSource>().clip = audioManager.play_shot();
-            //this.gameObject.transform.Find("Muzzle").GetComponent<AudioSource>().Play();
+            GameObject muzzle = this.gameObject.transform.Find("Tank2 V2,lav_Animation_Skud og larvefødder").Find("Muzzle").gameObject;
             playShotSound = false;
-            //this.gameObject.transform.Find("Muzzle").GetComponent<AudioSource>().clip = audioManager.play_reload();
-            //this.gameObject.transform.Find("Muzzle").GetComponent<AudioSource>().Play();
             muzzle.GetComponent<AudioSource>().clip = audioManager.play_reload();
+            muzzle.GetComponent<AudioSource>().volume = 0.5f;
             muzzle.GetComponent<AudioSource>().Play();
-        }
-        else if (!playShotSound)
-        {
-            print("error");
+            tankAnimator.SetTrigger("Shoot");
         }
     }
-    
-    public void test()
+
+    void power_up()
     {
-        print("test");
+        if (powerUpManager.powerUpPlayer1)
+        {
+
+        }
+    }
+
+    public void mysterybox_collision()
+    {
+        print("mysterybox");
+        if (!powerUpActive)
+        {
+            print("!powerupactive");
+            if (this.gameObject.tag == "Player1" || this.gameObject.tag == "Player2")
+            {
+                whichPowerUp = Random.Range(0, amountOfPowerUps);
+                print("powerActive");
+
+
+                if (whichPowerUp == 0)
+                {
+                    powerUpSuperSpeed = true;
+                    print("speed");
+                }
+                else if (whichPowerUp == 1)
+                {
+                    powerUpReloadTime = true;
+                    print("reload");
+                }
+                //else if (whichPowerUp == 2)
+                //{
+                //    powerUpScattershot = true;
+                //}
+
+                powerUpTime = Time.time;
+                powerUpActive = true;
+            }
+
+        }
+    }
+
+    void power_active()
+    {
+        if (Time.time >= powerUpTime + maxPowerUpTime)
+        {
+            powerUpSuperSpeed = false;
+            powerUpReloadTime = false;
+            powerUpScattershot = false;
+            powerUpActive = false;
+        }
     }
 }

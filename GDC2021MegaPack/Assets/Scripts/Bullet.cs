@@ -17,37 +17,43 @@ public class Bullet : MonoBehaviour
     void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+        audioManager= GameObject.FindObjectOfType<AudioManager>().GetComponent<AudioManager>();
         gameManager = FindObjectOfType<GameManager>();
         RBbullet = GetComponent<Rigidbody>();
         RBbullet.AddForce(transform.forward * bulletSpeed, ForceMode.VelocityChange);
-        //audioSource.clip = audioManager.play_shot();
-        //audioSource.Play();
-    }
-
-    private void Update()
-    {
-
+        audioSource.clip = audioManager.play_shot();
+        print(audioSource.clip);
+        audioSource.volume = 0.7f;
+        audioSource.Play();
 
     }
+
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Player1")
         {
             collision.gameObject.SetActive(false);
+            AudioSource.PlayClipAtPoint(audioManager.play_explosion(), collision.transform.position);
             Destroy(gameObject);
             gameManager.tank1Destroyed = true;
+            
         }
         else if (collision.gameObject.tag == "Player2")
         {
             collision.gameObject.SetActive(false);
+            AudioSource.PlayClipAtPoint(audioManager.play_explosion(), collision.transform.position);
             Destroy(gameObject);
             gameManager.tank2Destroyed = true;
+            
         }
         else
         {
             if (bulletBounces <= maxBulletBounces)
             {
+                audioSource.clip = audioManager.play_bounce();
+                audioSource.volume = 1f;
+                audioSource.Play();
                 bulletBounces++;
             }
             else
