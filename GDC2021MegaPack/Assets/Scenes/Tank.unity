@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 12522389}
   - component: {fileID: 12522391}
   - component: {fileID: 12522390}
+  - component: {fileID: 12522392}
   m_Layer: 5
   m_Name: ReloadUI tank1
   m_TagString: Untagged
@@ -198,6 +199,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 12522388}
   m_CullTransparentMesh: 1
+--- !u!225 &12522392
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 12522388}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &33648638
 GameObject:
   m_ObjectHideFlags: 0
@@ -1332,6 +1345,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2266306124977716833, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0e80186c6bd548d4ba45b909f71a4ce3, type: 2}
     - target: {fileID: 5033094679019593940, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
       propertyPath: cam
       value: 
@@ -1400,6 +1417,14 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player2
       objectReference: {fileID: 0}
+    - target: {fileID: 6144793319539376720, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0e80186c6bd548d4ba45b909f71a4ce3, type: 2}
+    - target: {fileID: 6831356472479763572, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6905192549379718400, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
       propertyPath: cam
       value: 
@@ -1424,6 +1449,10 @@ PrefabInstance:
       propertyPath: reloadUI
       value: 
       objectReference: {fileID: 1931710161}
+    - target: {fileID: 6905192549379718400, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 750902488}
     - target: {fileID: 6905192549379718401, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
       propertyPath: m_Name
       value: Tank 2
@@ -1554,7 +1583,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &582167476
 GameObject:
@@ -1869,6 +1898,60 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 623150996}
   m_CullTransparentMesh: 1
+--- !u!1 &750902487
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 750902489}
+  - component: {fileID: 750902488}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &750902488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 750902487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa243050271f2e14c925d7f8b9a51646, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClips:
+  - {fileID: 8300000, guid: ec25f2a889d8db0419242e5d4d38b6b9, type: 3}
+  - {fileID: 8300000, guid: 9d7ed55c6e5e71e41a249a56abe30d73, type: 3}
+  - {fileID: 8300000, guid: c63a69606cc1a5c4eaeca7149de9e998, type: 3}
+  - {fileID: 8300000, guid: 37f3e07fc05ad3d45bb0d549623b611f, type: 3}
+  - {fileID: 8300000, guid: 9c1aa3f1bbe2d134892bbbcfce2bb8d5, type: 3}
+  - {fileID: 8300000, guid: ce2db22660284b8478f1d13dcd22e2e7, type: 3}
+  - {fileID: 8300000, guid: c9f34a8daadad54478721386f06bf136, type: 3}
+  - {fileID: 8300000, guid: 48d8a760cbfae0f4c85e7da36979952c, type: 3}
+  - {fileID: 8300000, guid: f8ed0ee1de5199642a283761424f0870, type: 3}
+  - {fileID: 8300000, guid: edf31fc7233da9c4e919143917698c11, type: 3}
+--- !u!4 &750902489
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 750902487}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 11.040934, y: -6.274626, z: 5.9647045}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &802745703 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6905192549680891737, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
@@ -3282,6 +3365,7 @@ GameObject:
   - component: {fileID: 1931710162}
   - component: {fileID: 1931710164}
   - component: {fileID: 1931710163}
+  - component: {fileID: 1931710165}
   m_Layer: 5
   m_Name: ReloadUI tank2
   m_TagString: Untagged
@@ -3346,6 +3430,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1931710161}
   m_CullTransparentMesh: 1
+--- !u!225 &1931710165
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1931710161}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1939788621
 GameObject:
   m_ObjectHideFlags: 0
@@ -3944,6 +4040,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2266306124977716833, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: e8218d1d179a15b4fa6e1b11f5e86aed, type: 2}
     - target: {fileID: 5033094679019593940, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
       propertyPath: cam
       value: 
@@ -4012,6 +4112,22 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player1
       objectReference: {fileID: 0}
+    - target: {fileID: 6144793319539376720, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e8218d1d179a15b4fa6e1b11f5e86aed, type: 2}
+    - target: {fileID: 6831356472479763572, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6831356472479763572, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 9d7ed55c6e5e71e41a249a56abe30d73, type: 3}
+    - target: {fileID: 6831356472479763572, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6905192549379718400, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
       propertyPath: cam
       value: 
@@ -4036,6 +4152,18 @@ PrefabInstance:
       propertyPath: gunPoint1
       value: 
       objectReference: {fileID: 83424789}
+    - target: {fileID: 6905192549379718400, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
+      propertyPath: idleSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 9d7ed55c6e5e71e41a249a56abe30d73, type: 3}
+    - target: {fileID: 6905192549379718400, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 750902488}
+    - target: {fileID: 6905192549379718400, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
+      propertyPath: drivingSound
+      value: 
+      objectReference: {fileID: 8300000, guid: f8ed0ee1de5199642a283761424f0870, type: 3}
     - target: {fileID: 6905192549379718401, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
       propertyPath: m_Name
       value: Tank 1
