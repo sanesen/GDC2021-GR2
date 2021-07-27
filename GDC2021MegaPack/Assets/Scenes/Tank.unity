@@ -1346,6 +1346,10 @@ PrefabInstance:
       value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 6905192549379718400, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
+      propertyPath: powerUpTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6905192549379718400, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
       propertyPath: audioManager
       value: 
       objectReference: {fileID: 750902488}
@@ -1356,6 +1360,14 @@ PrefabInstance:
     - target: {fileID: 6905192549379718400, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
       propertyPath: rotationSpeed
       value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 6905192549379718400, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
+      propertyPath: maxPowerUpTime
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6905192549379718400, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
+      propertyPath: powerUpSuperSpeed
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6905192549379718401, guid: 9e5198edcedcb56478f647d286a1c14f, type: 3}
       propertyPath: m_Name
@@ -1842,6 +1854,9 @@ MonoBehaviour:
   minSpawnRate: 3
   maxSpawnRate: 4
   powerUp: {fileID: 1321899825178604433, guid: 48c6a7f89e463b04f8ebdc4e91305c1c, type: 3}
+  powerUpPlayer1: 0
+  powerUpPlayer2: 0
+  powerUps: []
 --- !u!4 &719185129
 Transform:
   m_ObjectHideFlags: 0
