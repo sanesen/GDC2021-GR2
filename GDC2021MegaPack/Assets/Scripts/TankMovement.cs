@@ -44,9 +44,7 @@ public class TankMovement : MonoBehaviour
 
     void Start()
     {
-        tankAnimator = this.gameObject.transform.Find("Tank_Færdig_Skud minus larvefødder").GetComponent<Animator>();
-
-        tankAnimator.SetBool("Test", true);
+        tankAnimator = this.gameObject.transform.Find("Tank2 V2,lav_Animation_Skud og larvefødder").GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         RBvelocity = gameObject.GetComponent<Rigidbody>();
         MeshRenderer color = gameObject.GetComponent<MeshRenderer>();
@@ -111,11 +109,12 @@ public class TankMovement : MonoBehaviour
                 audioSource.clip = audioManager.play_move();
                 audioSource.volume = 0.2f;
                 audioSource.Play();
-                rotationSpeed = 45f;
+                
                 if (Input.GetKeyDown(KeyCode.W))
                 {
                     zInput = 1f;
-
+                    rotationSpeed = 45f;
+                    tankAnimator.SetBool("Forward", true);
                     if (powerUpSuperSpeed)
                     {
                         zInput *= 1.5f;
@@ -125,6 +124,9 @@ public class TankMovement : MonoBehaviour
                 else if (Input.GetKeyDown(KeyCode.S))
                 {
                     zInput = -1f;
+                    rotationSpeed = -45f;
+                    tankAnimator.SetBool("Backward", true);
+
                     if (powerUpSuperSpeed)
                     {
                         zInput *= 1.5f;
@@ -139,6 +141,8 @@ public class TankMovement : MonoBehaviour
                 audioSource.Play();
                 zInput = 0;
                 rotationSpeed = 60f;
+                tankAnimator.SetBool("Forward", false);
+                tankAnimator.SetBool("Backward", false);
             }
             RBvelocity.AddForce(zInput * transform.forward * moveSpeed);
 
@@ -197,12 +201,11 @@ public class TankMovement : MonoBehaviour
                 audioSource.clip = audioManager.play_move();
                 audioSource.volume = 0.2f;
                 audioSource.Play();
-                rotationSpeed = 45f;
                 if (Input.GetKeyDown(KeyCode.UpArrow))
                 {
-                    
+                    rotationSpeed = 45f;
                     zInput = 1f;
-
+                    tankAnimator.SetBool("Forward", true);
                     if (powerUpSuperSpeed)
                     {
                         zInput *= 1.5f;
@@ -212,6 +215,8 @@ public class TankMovement : MonoBehaviour
                 else if (Input.GetKeyDown(KeyCode.DownArrow))
                 {
                     zInput = -1f;
+                    rotationSpeed = -45f;
+                    tankAnimator.SetBool("Backward", true);
                     if (powerUpSuperSpeed)
                     {
                         zInput *= 1.5f;
@@ -226,6 +231,8 @@ public class TankMovement : MonoBehaviour
                 audioSource.Play();
                 zInput = 0;
                 rotationSpeed = 60f;
+                tankAnimator.SetBool("Forward", false);
+                tankAnimator.SetBool("Backward", false);
             }
             RBvelocity.AddForce(zInput * transform.forward * moveSpeed);
 
@@ -280,7 +287,7 @@ public class TankMovement : MonoBehaviour
     {
         if (playShotSound)
         {
-            GameObject muzzle = this.gameObject.transform.Find("Tank_Færdig_Skud minus larvefødder").Find("Muzzle").gameObject;
+            GameObject muzzle = this.gameObject.transform.Find("Tank2 V2,lav_Animation_Skud og larvefødder").Find("Muzzle").gameObject;
             playShotSound = false;
             muzzle.GetComponent<AudioSource>().clip = audioManager.play_reload();
             muzzle.GetComponent<AudioSource>().volume = 0.5f;
