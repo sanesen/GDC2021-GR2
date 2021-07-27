@@ -44,6 +44,7 @@ public class TankMovement : MonoBehaviour
             color.material = color2;
             //child.GetComponent<MeshRenderer>().material = color2;
         }
+        rotationSpeed = 60f;
     }
 
     void Update()
@@ -87,6 +88,7 @@ public class TankMovement : MonoBehaviour
                 audioSource.clip = audioManager.play_move();
                 audioSource.volume = 0.2f;
                 audioSource.Play();
+                rotationSpeed = 45f;
                 if (Input.GetKeyDown(KeyCode.W))
                 {
                     zInput = 1f;
@@ -102,6 +104,7 @@ public class TankMovement : MonoBehaviour
                 audioSource.volume = 0.1f;
                 audioSource.Play();
                 zInput = 0;
+                rotationSpeed = 60f;
             }
             RBvelocity.AddForce(zInput * transform.forward * moveSpeed);
 
@@ -156,6 +159,7 @@ public class TankMovement : MonoBehaviour
                 audioSource.clip = audioManager.play_move();
                 audioSource.volume = 0.2f;
                 audioSource.Play();
+                rotationSpeed = 45f;
                 if (Input.GetKeyDown(KeyCode.UpArrow))
                 {
                     zInput = 1f;
@@ -171,6 +175,7 @@ public class TankMovement : MonoBehaviour
                 audioSource.volume = 0.1f;
                 audioSource.Play();
                 zInput = 0;
+                rotationSpeed = 60f;
             }
             RBvelocity.AddForce(zInput * transform.forward * moveSpeed);
 
