@@ -224,7 +224,7 @@ public class TankMovement : MonoBehaviour
     {
         if (playShotSound)
         {
-            GameObject muzzle = this.gameObject.transform.Find("Tank_Færdig - Uden animation").Find("Muzzle").gameObject;
+            GameObject muzzle = this.gameObject.transform.Find("Tank_Med animation af skyd(mangler fix) og larvefødder frem+tildbage").Find("Muzzle").gameObject;
             playShotSound = false;
             muzzle.GetComponent<AudioSource>().clip = audioManager.play_reload();
             muzzle.GetComponent<AudioSource>().volume = 0.5f;

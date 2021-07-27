@@ -37,6 +37,7 @@ public class PowerUpManager : MonoBehaviour
     {
         float powerUpx = Random.Range(gameManager.spawnpoints[0].transform.position.x, gameManager.spawnpoints[1].transform.position.x);
         float powerUpz = Random.Range(gameManager.spawnpoints[0].transform.position.z, gameManager.spawnpoints[1].transform.position.z);
-        Instantiate(powerUp, new Vector3(powerUpx, 0.6f, powerUpz),Quaternion.identity);
+        Instantiate(powerUp, new Vector3(powerUpx, 1f, powerUpz),Quaternion.identity);
+        print("spawn powerup");
     }
 }
