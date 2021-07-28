@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI pausedText;
     public Image pauseBackground;
     public Image winnerImage;
+    float tankDestroyedTimer;
+    public bool tankDestroyed;
 
 
 
@@ -65,7 +67,17 @@ public class GameManager : MonoBehaviour
         points();
         time_left();
         menu();
+
     }
+
+    private void LateUpdate()
+    {
+        if (Time.time > tankDestroyedTimer + 0.1f)
+        {
+            tankDestroyed = false;
+        }
+    }
+
 
     private void OnEnable()
     {
@@ -85,20 +97,20 @@ public class GameManager : MonoBehaviour
         {
             point2++;
             pointText2.text = point2.ToString();
-            tank1Destroyed = false;
             randomSpawnpoint = Random.Range(0, 4);
             tank1.transform.position = spawnpoints[randomSpawnpoint].transform.position;
             tank1.gameObject.SetActive(true);
+            tank1Destroyed = false;
         }
 
         if (tank2Destroyed)
         {
             point1++;
             pointText1.text = point1.ToString();
-            tank2Destroyed = false;
             randomSpawnpoint = Random.Range(0, 4);
             tank2.transform.position = spawnpoints[randomSpawnpoint].transform.position;
             tank2.gameObject.SetActive(true);
+            tank2Destroyed = false;
         }
     }
 
