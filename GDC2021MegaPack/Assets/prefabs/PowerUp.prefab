@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 1300727239591170595}
   - component: {fileID: 1740955193658816719}
   - component: {fileID: 3851708972834855136}
+  - component: {fileID: 3713998852935620898}
   m_Layer: 0
   m_Name: PowerUp
-  m_TagString: Untagged
+  m_TagString: MysteryBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +31,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children:
-  - {fileID: 6111568463899839552}
+  - {fileID: 1594461807032795313}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -91,11 +92,23 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1321899825178604433}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
+  m_IsTrigger: 1
+  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 9.181234, y: 9.306236, z: 9.586372}
+  m_Center: {x: 0.05728054, y: 0.04773712, z: 0.0042021275}
+--- !u!114 &3713998852935620898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1321899825178604433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8098fa199f3d5234fb9abb20119fb8e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1272851756243707738
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -159,6 +172,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: e92ac4a2c36d3414aa646f79ff1b1920, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e5f25f2ce77bbde4fa46c8319ded770f, type: 2}
     - target: {fileID: -1504981713932161579, guid: e92ac4a2c36d3414aa646f79ff1b1920, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -169,8 +186,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e92ac4a2c36d3414aa646f79ff1b1920, type: 3}
---- !u!4 &6111568463899839552 stripped
+--- !u!4 &1594461807032795313 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: e92ac4a2c36d3414aa646f79ff1b1920, type: 3}
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e92ac4a2c36d3414aa646f79ff1b1920, type: 3}
   m_PrefabInstance: {fileID: 1272851756243707738}
   m_PrefabAsset: {fileID: 0}

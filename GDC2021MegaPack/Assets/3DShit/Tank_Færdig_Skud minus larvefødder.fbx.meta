@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 82e84b82de22c9443b90d9678bd47323
+guid: ee0ee52573baec24e88ab24c342d6f83
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
       74: 1827226128182048838
-    second: Take 001
+    second: Shot
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -76,7 +76,7 @@ ModelImporter:
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
   referencedClips: []
-  importAnimation: 1
+  importAnimation: 0
   humanDescription:
     serializedVersion: 3
     human: []

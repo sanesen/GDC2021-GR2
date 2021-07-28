@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 3181075646172532533}
   m_Layer: 0
   m_Name: Bullet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -289,6 +289,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: a73049f1e9ee4d7409cf6061ec9a2055, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5f928fc087c1d054aa1fc124b8716092, type: 2}
     - target: {fileID: 919132149155446097, guid: a73049f1e9ee4d7409cf6061ec9a2055, type: 3}
       propertyPath: m_Name
       value: bullet_standard

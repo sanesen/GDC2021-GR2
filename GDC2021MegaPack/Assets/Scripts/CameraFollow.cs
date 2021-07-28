@@ -20,6 +20,7 @@ public class CameraFollow : MonoBehaviour
         transform.position = Vector3.SmoothDamp(transform.position, target.position, ref followTargetVelocity, damping);
        
         var rotationVector = targetRotation.eulerAngles;
+        rotationVector = rotationVector + new Vector3(25, 0, 0);
 
         transform.rotation = Quaternion.Euler(rotationVector);
     }
