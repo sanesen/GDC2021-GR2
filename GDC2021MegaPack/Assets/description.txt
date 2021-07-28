@@ -1,0 +1,14 @@
+Bouncability Battle Arena!
+
+
+Det klassiske Y8 spil AZ-tanks er nu blevet genskabt i en ekstra dimension!
+BBA er en ny rendering af AZ-tanks, men nu i 3D.
+
+
+Controls:
+W,A,S,D - Player 1 Movement
+Spacebar - Player 1 Shoot
+R - Player 1 reset tank orientation
+^,<,v,> - Player 2 Movement
+P - Player 2 Shoot
+L - Player 2 reset tank orientation
