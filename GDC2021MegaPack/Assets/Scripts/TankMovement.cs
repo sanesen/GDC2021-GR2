@@ -49,7 +49,6 @@ public class TankMovement : MonoBehaviour
         MeshRenderer color = gameObject.GetComponent<MeshRenderer>();
         powerUpManager = FindObjectOfType<PowerUpManager>();
         gameManager = FindObjectOfType<GameManager>();
-        print(powerUpActive.ToString());
         audioSource.clip = audioManager.play_idle();
         audioSource.volume = 0.1f;
         audioSource.Play();
@@ -119,7 +118,6 @@ public class TankMovement : MonoBehaviour
                     if (powerUpSuperSpeed)
                     {
                         zInput *= 1.5f;
-                        print("superspeed");
                     }
                 }
                 else if (Input.GetKeyDown(KeyCode.S))
@@ -131,7 +129,6 @@ public class TankMovement : MonoBehaviour
                     if (powerUpSuperSpeed)
                     {
                         zInput *= 1.5f;
-                        print("superspeed");
                     }
                 }
             }
@@ -165,7 +162,6 @@ public class TankMovement : MonoBehaviour
                 if (powerUpReloadTime)
                 {
                     reloadTime = superReloadTime;
-                    print("fastReload");
                 }
 
                 if (timeSinceLastFire + reloadTime <= Time.time)
@@ -210,7 +206,6 @@ public class TankMovement : MonoBehaviour
                     if (powerUpSuperSpeed)
                     {
                         zInput *= 1.5f;
-                        print("superspeed");
                     }
                 }
                 else if (Input.GetKeyDown(KeyCode.DownArrow))
@@ -221,7 +216,6 @@ public class TankMovement : MonoBehaviour
                     if (powerUpSuperSpeed)
                     {
                         zInput *= 1.5f;
-                        print("superspeed");
                     }
                 }
             }
@@ -249,11 +243,9 @@ public class TankMovement : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.P))
             {
-                print("gMER");
                 if (powerUpReloadTime)
                 {
                     reloadTime = superReloadTime;
-                    print("fastReload");
                 }
                 if (timeSinceLastFire + reloadTime <= Time.time)
                 {
@@ -308,25 +300,20 @@ public class TankMovement : MonoBehaviour
 
     public void mysterybox_collision()
     {
-        print("mysterybox");
         if (!powerUpActive)
         {
-            print("!powerupactive");
             if (this.gameObject.tag == "Player1" || this.gameObject.tag == "Player2")
             {
                 whichPowerUp = Random.Range(0, amountOfPowerUps);
-                print("powerActive");
 
 
                 if (whichPowerUp == 0)
                 {
                     powerUpSuperSpeed = true;
-                    print("speed");
                 }
                 else if (whichPowerUp == 1)
                 {
                     powerUpReloadTime = true;
-                    print("reload");
                 }
                 //else if (whichPowerUp == 2)
                 //{
