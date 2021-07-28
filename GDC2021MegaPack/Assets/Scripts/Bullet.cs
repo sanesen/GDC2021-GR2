@@ -24,7 +24,6 @@ public class Bullet : MonoBehaviour
         tankMovement = FindObjectOfType<TankMovement>();
         RBbullet.AddForce(transform.forward * bulletSpeed, ForceMode.VelocityChange);
         audioSource.clip = audioManager.play_shot();
-        print(audioSource.clip);
         audioSource.volume = 0.7f;
         audioSource.Play();
 
@@ -33,7 +32,6 @@ public class Bullet : MonoBehaviour
     {
         if (gameManager.tankDestroyed)
         {
-            print("destroy bullet");
             Destroy(this.gameObject);
         }
     }
@@ -46,7 +44,6 @@ public class Bullet : MonoBehaviour
             collision.gameObject.SetActive(false);
             AudioSource.PlayClipAtPoint(audioManager.play_explosion(), collision.transform.position);
             Destroy(gameObject);
-            print("hitplayer1");
             gameManager.tank1Destroyed = true;
 
             GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
@@ -61,7 +58,6 @@ public class Bullet : MonoBehaviour
             collision.gameObject.SetActive(false);
             AudioSource.PlayClipAtPoint(audioManager.play_explosion(), collision.transform.position);
             Destroy(gameObject);
-            print("hitplayer2");
             gameManager.tank2Destroyed = true;
 
             GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
