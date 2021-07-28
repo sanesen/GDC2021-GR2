@@ -9,8 +9,6 @@ public class TankMovement : MonoBehaviour
     public float moveSpeed;
     public float maxMoveSpeed;
     public float rotationSpeed;
-    public GameObject cam;
-    public GameObject camPos;
     public bool player1;
     public Material color1, color2;
     //public GameObject child;
@@ -24,7 +22,7 @@ public class TankMovement : MonoBehaviour
     public AudioClip idleSound, drivingSound;
     public AudioManager audioManager;
     float xInput, zInput;
-    AudioSource audioSource;
+    public AudioSource audioSource;
     bool playShotSound;
     bool playReloadSound;
     Animator tankAnimator;
@@ -52,6 +50,9 @@ public class TankMovement : MonoBehaviour
         powerUpManager = FindObjectOfType<PowerUpManager>();
         gameManager = FindObjectOfType<GameManager>();
         print(powerUpActive.ToString());
+        audioSource.clip = audioManager.play_idle();
+        audioSource.volume = 0.1f;
+        audioSource.Play();
 
         standardReloadTime = reloadTime;
         superReloadTime = reloadTime / 2;
@@ -76,10 +77,6 @@ public class TankMovement : MonoBehaviour
         muzzle_sounds();
         compass();
         power_active();
-
-
-        cam.transform.position = camPos.transform.position;
-        cam.transform.rotation = camPos.transform.rotation;
 
     }
 
@@ -111,12 +108,12 @@ public class TankMovement : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S))
             {
                 audioSource.clip = audioManager.play_move();
-                audioSource.volume = 0.2f;
+                audioSource.volume = 0.9f;
                 audioSource.Play();
 
                 if (Input.GetKeyDown(KeyCode.W))
                 {
-                    zInput = 1f;
+                    zInput = 1.5f;
                     rotationSpeed = 45f;
                     tankAnimator.SetBool("Forward", true);
                     if (powerUpSuperSpeed)
@@ -141,7 +138,7 @@ public class TankMovement : MonoBehaviour
             else if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S))
             {
                 audioSource.clip = audioManager.play_idle();
-                audioSource.volume = 0.1f;
+                audioSource.volume = 0.05f;
                 audioSource.Play();
                 zInput = 0;
                 rotationSpeed = 60f;
@@ -203,12 +200,12 @@ public class TankMovement : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
             {
                 audioSource.clip = audioManager.play_move();
-                audioSource.volume = 0.2f;
+                audioSource.volume = 0.9f;
                 audioSource.Play();
                 if (Input.GetKeyDown(KeyCode.UpArrow))
                 {
                     rotationSpeed = 45f;
-                    zInput = 1f;
+                    zInput = 1.5f;
                     tankAnimator.SetBool("Forward", true);
                     if (powerUpSuperSpeed)
                     {
@@ -231,7 +228,7 @@ public class TankMovement : MonoBehaviour
             else if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow))
             {
                 audioSource.clip = audioManager.play_idle();
-                audioSource.volume = 0.1f;
+                audioSource.volume = 0.05f;
                 audioSource.Play();
                 zInput = 0;
                 rotationSpeed = 60f;
