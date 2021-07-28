@@ -2390,8 +2390,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff72ef5252d8f6c4098cfc0998334b6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minSpawnRate: 3
-  maxSpawnRate: 4
+  minSpawnRate: 20
+  maxSpawnRate: 30
   powerUp: {fileID: 1321899825178604433, guid: 48c6a7f89e463b04f8ebdc4e91305c1c, type: 3}
   powerUpPlayer1: 0
   powerUpPlayer2: 0
@@ -4165,7 +4165,7 @@ MonoBehaviour:
   tank2Destroyed: 0
   gameScene:
     m_Handle: 0
-  gameTime: 2
+  gameTime: 120
   pointText1: {fileID: 1996911755}
   pointText2: {fileID: 90076445}
   timerText: {fileID: 2102373224}
@@ -6108,6 +6108,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7141412495680889703}
   - component: {fileID: 7516706237466556894}
+  - component: {fileID: 7516706237466556895}
   m_Layer: 0
   m_Name: Havenisse
   m_TagString: Untagged
@@ -6129,6 +6130,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!65 &7516706237466556895
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7516706237466556893}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.20517221, y: 1.0433712, z: 0.2570089}
+  m_Center: {x: -0.000000023841858, y: 0.49661428, z: 0.0017278314}
 --- !u!33 &7612004882456222734
 MeshFilter:
   m_ObjectHideFlags: 0
