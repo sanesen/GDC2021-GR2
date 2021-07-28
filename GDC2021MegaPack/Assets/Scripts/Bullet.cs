@@ -13,19 +13,29 @@ public class Bullet : MonoBehaviour
     public int maxBulletBounces;
     public AudioManager audioManager;
     AudioSource audioSource;
+    TankMovement tankMovement;
 
     void Awake()
     {
         audioSource = GetComponent<AudioSource>();
-        audioManager= GameObject.FindObjectOfType<AudioManager>().GetComponent<AudioManager>();
+        audioManager = GameObject.FindObjectOfType<AudioManager>().GetComponent<AudioManager>();
         gameManager = FindObjectOfType<GameManager>();
         RBbullet = GetComponent<Rigidbody>();
+        tankMovement = FindObjectOfType<TankMovement>();
         RBbullet.AddForce(transform.forward * bulletSpeed, ForceMode.VelocityChange);
         audioSource.clip = audioManager.play_shot();
         print(audioSource.clip);
         audioSource.volume = 0.7f;
         audioSource.Play();
 
+    }
+    private void Update()
+    {
+        if (gameManager.tankDestroyed)
+        {
+            print("destroy bullet");
+            Destroy(this.gameObject);
+        }
     }
 
 
@@ -36,16 +46,30 @@ public class Bullet : MonoBehaviour
             collision.gameObject.SetActive(false);
             AudioSource.PlayClipAtPoint(audioManager.play_explosion(), collision.transform.position);
             Destroy(gameObject);
+            print("hitplayer1");
             gameManager.tank1Destroyed = true;
-            
+
+            GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
+            foreach (GameObject bullet in bullets)
+            {
+                Destroy(bullet);
+            }
+
         }
         else if (collision.gameObject.tag == "Player2")
         {
             collision.gameObject.SetActive(false);
             AudioSource.PlayClipAtPoint(audioManager.play_explosion(), collision.transform.position);
             Destroy(gameObject);
+            print("hitplayer2");
             gameManager.tank2Destroyed = true;
-            
+
+            GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
+            foreach (GameObject bullet in bullets)
+            {
+                Destroy(bullet);
+            }
+
         }
         else
         {
@@ -69,5 +93,6 @@ public class Bullet : MonoBehaviour
             transform.rotation = targetRotation;
 
         }
+
     }
 }
