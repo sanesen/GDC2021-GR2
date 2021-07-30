@@ -12,3 +12,8 @@ R - Player 1 reset tank orientation
 ^,<,v,> - Player 2 Movement
 P - Player 2 Shoot
 L - Player 2 reset tank orientation
+
+
+
+Skabt Af:
+Tobias Jultved, Simon Anesen, Lasse Bachmann, Kasper Schnejder, Jonas Johansen, Lukas Pliniussen.
