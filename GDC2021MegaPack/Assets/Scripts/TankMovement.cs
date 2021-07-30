@@ -9,8 +9,6 @@ public class TankMovement : MonoBehaviour
     public float moveSpeed;
     public float maxMoveSpeed;
     public float rotationSpeed;
-    public GameObject cam;
-    public GameObject camPos;
     public bool player1;
     public Material color1, color2;
     //public GameObject child;
@@ -24,7 +22,7 @@ public class TankMovement : MonoBehaviour
     public AudioClip idleSound, drivingSound;
     public AudioManager audioManager;
     float xInput, zInput;
-    AudioSource audioSource;
+    public AudioSource audioSource;
     bool playShotSound;
     bool playReloadSound;
     Animator tankAnimator;
@@ -51,7 +49,9 @@ public class TankMovement : MonoBehaviour
         MeshRenderer color = gameObject.GetComponent<MeshRenderer>();
         powerUpManager = FindObjectOfType<PowerUpManager>();
         gameManager = FindObjectOfType<GameManager>();
-        print(powerUpActive.ToString());
+        audioSource.clip = audioManager.play_idle();
+        audioSource.volume = 0.1f;
+        audioSource.Play();
 
         standardReloadTime = reloadTime;
         superReloadTime = reloadTime / 2;
@@ -76,10 +76,6 @@ public class TankMovement : MonoBehaviour
         muzzle_sounds();
         compass();
         power_active();
-
-
-        cam.transform.position = camPos.transform.position;
-        cam.transform.rotation = camPos.transform.rotation;
 
     }
 
@@ -111,18 +107,17 @@ public class TankMovement : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S))
             {
                 audioSource.clip = audioManager.play_move();
-                audioSource.volume = 0.2f;
+                audioSource.volume = 0.9f;
                 audioSource.Play();
 
                 if (Input.GetKeyDown(KeyCode.W))
                 {
-                    zInput = 1f;
+                    zInput = 1.5f;
                     rotationSpeed = 45f;
                     tankAnimator.SetBool("Forward", true);
                     if (powerUpSuperSpeed)
                     {
                         zInput *= 1.5f;
-                        print("superspeed");
                     }
                 }
                 else if (Input.GetKeyDown(KeyCode.S))
@@ -134,14 +129,13 @@ public class TankMovement : MonoBehaviour
                     if (powerUpSuperSpeed)
                     {
                         zInput *= 1.5f;
-                        print("superspeed");
                     }
                 }
             }
             else if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S))
             {
                 audioSource.clip = audioManager.play_idle();
-                audioSource.volume = 0.1f;
+                audioSource.volume = 0.05f;
                 audioSource.Play();
                 zInput = 0;
                 rotationSpeed = 60f;
@@ -168,7 +162,6 @@ public class TankMovement : MonoBehaviour
                 if (powerUpReloadTime)
                 {
                     reloadTime = superReloadTime;
-                    print("fastReload");
                 }
 
                 if (timeSinceLastFire + reloadTime <= Time.time)
@@ -203,17 +196,16 @@ public class TankMovement : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
             {
                 audioSource.clip = audioManager.play_move();
-                audioSource.volume = 0.2f;
+                audioSource.volume = 0.9f;
                 audioSource.Play();
                 if (Input.GetKeyDown(KeyCode.UpArrow))
                 {
                     rotationSpeed = 45f;
-                    zInput = 1f;
+                    zInput = 1.5f;
                     tankAnimator.SetBool("Forward", true);
                     if (powerUpSuperSpeed)
                     {
                         zInput *= 1.5f;
-                        print("superspeed");
                     }
                 }
                 else if (Input.GetKeyDown(KeyCode.DownArrow))
@@ -224,14 +216,13 @@ public class TankMovement : MonoBehaviour
                     if (powerUpSuperSpeed)
                     {
                         zInput *= 1.5f;
-                        print("superspeed");
                     }
                 }
             }
             else if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow))
             {
                 audioSource.clip = audioManager.play_idle();
-                audioSource.volume = 0.1f;
+                audioSource.volume = 0.05f;
                 audioSource.Play();
                 zInput = 0;
                 rotationSpeed = 60f;
@@ -252,11 +243,9 @@ public class TankMovement : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.P))
             {
-                print("gMER");
                 if (powerUpReloadTime)
                 {
                     reloadTime = superReloadTime;
-                    print("fastReload");
                 }
                 if (timeSinceLastFire + reloadTime <= Time.time)
                 {
@@ -311,25 +300,20 @@ public class TankMovement : MonoBehaviour
 
     public void mysterybox_collision()
     {
-        print("mysterybox");
         if (!powerUpActive)
         {
-            print("!powerupactive");
             if (this.gameObject.tag == "Player1" || this.gameObject.tag == "Player2")
             {
                 whichPowerUp = Random.Range(0, amountOfPowerUps);
-                print("powerActive");
 
 
                 if (whichPowerUp == 0)
                 {
                     powerUpSuperSpeed = true;
-                    print("speed");
                 }
                 else if (whichPowerUp == 1)
                 {
                     powerUpReloadTime = true;
-                    print("reload");
                 }
                 //else if (whichPowerUp == 2)
                 //{

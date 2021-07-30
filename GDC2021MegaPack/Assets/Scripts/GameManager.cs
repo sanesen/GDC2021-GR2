@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     public Image winnerImage;
     float tankDestroyedTimer;
     public bool tankDestroyed;
+    TankMovement tankMovement;
 
 
 
@@ -38,6 +39,7 @@ public class GameManager : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
         DontDestroyOnLoad(canvas);
+        tankMovement = FindObjectOfType<TankMovement>();
 
         if (_instance != null)
         {
@@ -177,6 +179,7 @@ public class GameManager : MonoBehaviour
             if (pauseState == false)
             {
                 Time.timeScale = 0;
+                tankMovement.audioSource.Pause();
                 pauseState = true;
                 pauseBackground.enabled = true;
                 pausedText.enabled = true;
@@ -186,6 +189,7 @@ public class GameManager : MonoBehaviour
             else
             {
                 Time.timeScale = 1;
+                tankMovement.audioSource.Play();
                 pauseState = false;
                 pausedText.enabled = false;
                 pauseBackground.enabled = false;
