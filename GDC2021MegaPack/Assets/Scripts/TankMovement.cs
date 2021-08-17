@@ -37,16 +37,21 @@ public class TankMovement : MonoBehaviour
     public float maxPowerUpTime;
     float superReloadTime;
     float standardReloadTime;
+    MeshRenderer tankRenderer;
+    MeshRenderer color;
+    public Material reloadRed, reloadGreen;
+
     GameManager gameManager;
 
 
 
     void Start()
     {
+        tankRenderer = this.gameObject.transform.Find("Reload-indicator").GetComponent<MeshRenderer>();
         tankAnimator = this.gameObject.transform.Find("Tank2 V2,lav_Animation_Skud og larvefødder").GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         RBvelocity = gameObject.GetComponent<Rigidbody>();
-        MeshRenderer color = gameObject.GetComponent<MeshRenderer>();
+        color = gameObject.GetComponent<MeshRenderer>();
         powerUpManager = FindObjectOfType<PowerUpManager>();
         gameManager = FindObjectOfType<GameManager>();
         audioSource.clip = audioManager.play_idle();
@@ -184,10 +189,12 @@ public class TankMovement : MonoBehaviour
 
             if (timeSinceLastFire + reloadTime > Time.time)
             {
+                tankRenderer.material = reloadRed;
                 reloadUI.GetComponent<CanvasGroup>().alpha = 0.6f;
             }
             else
             {
+                tankRenderer.material = reloadGreen;
                 reloadUI.GetComponent<CanvasGroup>().alpha = 1f;
             }
         }
@@ -267,11 +274,13 @@ public class TankMovement : MonoBehaviour
 
             if (timeSinceLastFire + reloadTime > Time.time)
             {
-                reloadUI.GetComponent<CanvasGroup>().alpha = 0.6f;
+                //tankRenderer.material = reloadRed;
+                //reloadUI.GetComponent<CanvasGroup>().alpha = 0.6f;
             }
             else
             {
-                reloadUI.GetComponent<CanvasGroup>().alpha = 1f;
+                //tankRenderer.material = reloadGreen;
+                //reloadUI.GetComponent<CanvasGroup>().alpha = 1f;
             }
         }
         RBvelocity.velocity = Vector3.ClampMagnitude(RBvelocity.velocity, maxMoveSpeed);
