@@ -26,7 +26,6 @@ public class Bullet : MonoBehaviour
         audioSource.clip = audioManager.play_shot();
         audioSource.volume = 0.7f;
         audioSource.Play();
-
     }
     private void Update()
     {

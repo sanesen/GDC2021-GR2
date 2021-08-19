@@ -43,7 +43,7 @@ public class TankMovement : MonoBehaviour
 
     GameManager gameManager;
 
-
+    public KeyCode forward, backward, left, right, shoot, reset;
 
     void Start()
     {
@@ -76,8 +76,7 @@ public class TankMovement : MonoBehaviour
 
     void Update()
     {
-
-
+        move_handler();
         muzzle_sounds();
         compass();
         power_active();
@@ -86,7 +85,7 @@ public class TankMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        move_handler();
+
     }
 
     void compass()
@@ -107,182 +106,91 @@ public class TankMovement : MonoBehaviour
 
     void move_handler()
     {
-        if (player1)
+
+
+        if (Input.GetKeyDown(forward) || Input.GetKeyDown(backward))
         {
-            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S))
+            audioSource.clip = audioManager.play_move();
+            audioSource.volume = 0.9f;
+            audioSource.Play();
+            if (Input.GetKeyDown(forward))
             {
-                audioSource.clip = audioManager.play_move();
-                audioSource.volume = 0.9f;
-                audioSource.Play();
-
-                if (Input.GetKeyDown(KeyCode.W))
+                rotationSpeed = 45f;
+                zInput = 1.5f;
+                tankAnimator.SetBool("Forward", true);
+                if (powerUpSuperSpeed)
                 {
-                    zInput = 1.5f;
-                    rotationSpeed = 45f;
-                    tankAnimator.SetBool("Forward", true);
-                    if (powerUpSuperSpeed)
-                    {
-                        zInput *= 1.5f;
-                    }
-                }
-                else if (Input.GetKeyDown(KeyCode.S))
-                {
-                    zInput = -1f;
-                    rotationSpeed = -45f;
-                    tankAnimator.SetBool("Backward", true);
-
-                    if (powerUpSuperSpeed)
-                    {
-                        zInput *= 1.5f;
-                    }
+                    zInput *= 1.5f;
                 }
             }
-            else if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S))
+            else if (Input.GetKeyDown(backward))
             {
-                audioSource.clip = audioManager.play_idle();
-                audioSource.volume = 0.05f;
-                audioSource.Play();
-                zInput = 0;
-                rotationSpeed = 60f;
-                tankAnimator.SetBool("Forward", false);
-                tankAnimator.SetBool("Backward", false);
-            }
-            RBvelocity.AddForce(zInput * transform.forward * moveSpeed);
-
-
-
-
-            if (Input.GetKey("d"))
-            {
-                transform.eulerAngles += new Vector3(0, rotationSpeed, 0) * Time.fixedDeltaTime;
-            }
-
-            if (Input.GetKey("a"))
-            {
-                transform.eulerAngles += new Vector3(0, -rotationSpeed, 0) * Time.fixedDeltaTime;
-            }
-
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                if (powerUpReloadTime)
+                zInput = -1f;
+                rotationSpeed = -45f;
+                tankAnimator.SetBool("Backward", true);
+                if (powerUpSuperSpeed)
                 {
-                    reloadTime = superReloadTime;
+                    zInput *= 1.5f;
                 }
-
-                if (timeSinceLastFire + reloadTime <= Time.time)
-                {
-                    timeSinceLastFire = Time.time;
-                    Instantiate(bullet, new Vector3(gunPoint1.transform.position.x, gunPoint1.transform.position.y, gunPoint1.transform.position.z),
-                    Quaternion.Euler(new Vector3(this.gameObject.transform.eulerAngles.x, this.gameObject.transform.eulerAngles.y, this.gameObject.transform.eulerAngles.z)));
-                    playShotSound = true;
-                    playReloadSound = true;
-                }
-                reloadTime = standardReloadTime;
             }
+        }
+        else if (Input.GetKeyUp(forward) || Input.GetKeyUp(backward))
+        {
+            audioSource.clip = audioManager.play_idle();
+            audioSource.volume = 0.05f;
+            audioSource.Play();
+            zInput = 0;
+            rotationSpeed = 60f;
+            tankAnimator.SetBool("Forward", false);
+            tankAnimator.SetBool("Backward", false);
+        }
+        RBvelocity.AddForce(zInput * transform.forward * moveSpeed);
 
-            if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKey(right))
+        {
+            transform.eulerAngles += new Vector3(0, rotationSpeed, 0) * Time.deltaTime;
+        }
+
+        if (Input.GetKey(left))
+        {
+            transform.eulerAngles += new Vector3(0, -rotationSpeed, 0) * Time.deltaTime;
+        }
+
+        if (Input.GetKeyDown(shoot))
+        {
+            if (powerUpReloadTime)
             {
-
-                gameObject.transform.rotation = Quaternion.identity;
-
+                reloadTime = superReloadTime;
             }
-
-            if (timeSinceLastFire + reloadTime > Time.time)
+            if (timeSinceLastFire + reloadTime <= Time.time)
             {
-                tankRenderer.material = reloadRed;
-                reloadUI.GetComponent<CanvasGroup>().alpha = 0.6f;
+                timeSinceLastFire = Time.time;
+                Instantiate(bullet, new Vector3(gunPoint1.transform.position.x, gunPoint1.transform.position.y, gunPoint1.transform.position.z),
+                Quaternion.Euler(new Vector3(this.gameObject.transform.eulerAngles.x, this.gameObject.transform.eulerAngles.y, this.gameObject.transform.eulerAngles.z)));
+                playShotSound = true;
+                playReloadSound = true;
             }
-            else
-            {
-                tankRenderer.material = reloadGreen;
-                reloadUI.GetComponent<CanvasGroup>().alpha = 1f;
-            }
+            reloadTime = standardReloadTime;
+        }
+
+        if (Input.GetKeyDown(reset))
+        {
+
+            gameObject.transform.rotation = Quaternion.identity;
+
+        }
+
+        if (timeSinceLastFire + reloadTime > Time.time)
+        {
+            tankRenderer.material = reloadRed;
+            //reloadUI.GetComponent<CanvasGroup>().alpha = 0.6f;
         }
         else
         {
-            if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
-            {
-                audioSource.clip = audioManager.play_move();
-                audioSource.volume = 0.9f;
-                audioSource.Play();
-                if (Input.GetKeyDown(KeyCode.UpArrow))
-                {
-                    rotationSpeed = 45f;
-                    zInput = 1.5f;
-                    tankAnimator.SetBool("Forward", true);
-                    if (powerUpSuperSpeed)
-                    {
-                        zInput *= 1.5f;
-                    }
-                }
-                else if (Input.GetKeyDown(KeyCode.DownArrow))
-                {
-                    zInput = -1f;
-                    rotationSpeed = -45f;
-                    tankAnimator.SetBool("Backward", true);
-                    if (powerUpSuperSpeed)
-                    {
-                        zInput *= 1.5f;
-                    }
-                }
-            }
-            else if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow))
-            {
-                audioSource.clip = audioManager.play_idle();
-                audioSource.volume = 0.05f;
-                audioSource.Play();
-                zInput = 0;
-                rotationSpeed = 60f;
-                tankAnimator.SetBool("Forward", false);
-                tankAnimator.SetBool("Backward", false);
-            }
-            RBvelocity.AddForce(zInput * transform.forward * moveSpeed);
-
-            if (Input.GetKey(KeyCode.RightArrow))
-            {
-                transform.eulerAngles += new Vector3(0, rotationSpeed, 0) * Time.deltaTime;
-            }
-
-            if (Input.GetKey(KeyCode.LeftArrow))
-            {
-                transform.eulerAngles += new Vector3(0, -rotationSpeed, 0) * Time.deltaTime;
-            }
-
-            if (Input.GetKeyDown(KeyCode.P))
-            {
-                if (powerUpReloadTime)
-                {
-                    reloadTime = superReloadTime;
-                }
-                if (timeSinceLastFire + reloadTime <= Time.time)
-                {
-                    timeSinceLastFire = Time.time;
-                    Instantiate(bullet, new Vector3(gunPoint1.transform.position.x, gunPoint1.transform.position.y, gunPoint1.transform.position.z),
-                    Quaternion.Euler(new Vector3(this.gameObject.transform.eulerAngles.x, this.gameObject.transform.eulerAngles.y, this.gameObject.transform.eulerAngles.z)));
-                    playShotSound = true;
-                    playReloadSound = true;
-                }
-                reloadTime = standardReloadTime;
-            }
-
-            if (Input.GetKeyDown(KeyCode.O))
-            {
-
-                gameObject.transform.rotation = Quaternion.identity;
-
-            }
-
-            if (timeSinceLastFire + reloadTime > Time.time)
-            {
-                //tankRenderer.material = reloadRed;
-                //reloadUI.GetComponent<CanvasGroup>().alpha = 0.6f;
-            }
-            else
-            {
-                //tankRenderer.material = reloadGreen;
-                //reloadUI.GetComponent<CanvasGroup>().alpha = 1f;
-            }
+            tankRenderer.material = reloadGreen;
+            //reloadUI.GetComponent<CanvasGroup>().alpha = 1f;
         }
+
         RBvelocity.velocity = Vector3.ClampMagnitude(RBvelocity.velocity, maxMoveSpeed);
     }
 

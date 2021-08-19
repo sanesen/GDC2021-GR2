@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a5bcb414b2cc084d99770e37e366400, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSpeed: 15
+  bulletSpeed: 16
   maxBulletBounces: 3
   audioManager: {fileID: 0}
 --- !u!82 &3181075646172532533
