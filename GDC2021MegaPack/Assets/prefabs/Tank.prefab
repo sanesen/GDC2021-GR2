@@ -426,6 +426,9 @@ MonoBehaviour:
   maxPowerUpTime: 20
   reloadRed: {fileID: 2100000, guid: c1907c4bfff2679418050a8e516cf0a4, type: 2}
   reloadGreen: {fileID: 2100000, guid: bd80f432c1bf4524b95468e094fd23d7, type: 2}
+  powerUpIcon: {fileID: 0}
+  fastSpeedIcon: {fileID: 21300000, guid: b89d4c6d92e041f4c85eadc6599b6cf9, type: 3}
+  reloadIcon: {fileID: 21300000, guid: f64bfb8c8ea0e754ba1a2cc557a69165, type: 3}
   forward: 119
   backward: 115
   left: 97

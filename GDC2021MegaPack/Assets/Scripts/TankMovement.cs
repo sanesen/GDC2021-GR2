@@ -40,6 +40,8 @@ public class TankMovement : MonoBehaviour
     MeshRenderer tankRenderer;
     MeshRenderer color;
     public Material reloadRed, reloadGreen;
+    public Image powerUpIcon;
+    public Sprite fastSpeedIcon, reloadIcon;
 
     GameManager gameManager;
 
@@ -227,15 +229,13 @@ public class TankMovement : MonoBehaviour
                 if (whichPowerUp == 0)
                 {
                     powerUpSuperSpeed = true;
+                    powerUpIcon.sprite = fastSpeedIcon;
                 }
                 else if (whichPowerUp == 1)
                 {
                     powerUpReloadTime = true;
+                    powerUpIcon.sprite = reloadIcon;
                 }
-                //else if (whichPowerUp == 2)
-                //{
-                //    powerUpScattershot = true;
-                //}
 
                 powerUpTime = Time.time;
                 powerUpActive = true;
@@ -252,6 +252,7 @@ public class TankMovement : MonoBehaviour
             powerUpReloadTime = false;
             powerUpScattershot = false;
             powerUpActive = false;
+            powerUpIcon.sprite = null;
         }
     }
 }
